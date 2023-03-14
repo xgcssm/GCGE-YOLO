@@ -20,7 +20,7 @@ Requirements:
     $ pip install -r requirements.txt coremltools onnx onnx-simplifier onnxruntime openvino-dev tensorflow-cpu  # CPU
     $ pip install -r requirements.txt coremltools onnx onnx-simplifier onnxruntime-gpu openvino-dev tensorflow  # GPU
 
-Usage:
+Usage:dataloaders.py
     $ python path/to/export.py --weights yolov5s.pt --include torchscript onnx openvino engine coreml tflite ...
 
 Inference:
@@ -119,7 +119,7 @@ def export_onnx(model, im, file, opset, train, dynamic, simplify, prefix=colorst
 
         torch.onnx.export(
             model.cpu() if dynamic else model,  # --dynamic only compatible with cpu
-            im.cpu() if dynamic else im,
+            im.cpu() if dynamic else im,        # --转onnx时如果出现无法转换的问题，修改这里，参考官方issue
             f,
             verbose=False,
             opset_version=opset,
