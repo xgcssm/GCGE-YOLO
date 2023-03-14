@@ -211,7 +211,7 @@ class C3SPP(C3):
         c_ = int(c2 * e)
         self.m = SPP(c_, c_, k)
 
-
+# C3Ghost
 class C3Ghost(C3):
     # C3 module with GhostBottleneck()
     def __init__(self, c1, c2, n=1, shortcut=True, g=1, e=0.5):
@@ -881,7 +881,7 @@ class h_swish(nn.Module):
     def forward(self, x):
         return x * self.sigmoid(x)
 
-
+# AdaptiveAvgPool2d->AvgPool2d
 class CoordAtt(nn.Module):
     def __init__(self, inp, oup, reduction=32):
         super(CoordAtt, self).__init__()
@@ -899,7 +899,7 @@ class CoordAtt(nn.Module):
 
     def forward(self, x):
         identity = x
-        n,c,h,w = x.size()
+        n, c, h, w = x.size()
 
         if torch.is_tensor(h):
             h = h.item()  # 这里是修正代码
