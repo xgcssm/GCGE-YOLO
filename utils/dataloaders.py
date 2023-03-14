@@ -668,7 +668,7 @@ class LoadImagesAndLabels(Dataset):
                 interp = cv2.INTER_LINEAR if self.augment else cv2.INTER_AREA  # random.choice(self.rand_interp_methods)
                 im = cv2.resize(im, (int(w0 * r), int(h0 * r)), interpolation=interp)
 
-                ##----运动模糊
+                ##----motion bulr
                 # im = A.Compose([
                 #     A.MotionBlur(blur_limit=[20, 25], p=1)
                 #  ], p=0.5)(image=im)['image']  # 这三行代码是运动模糊 总共是百分之50的概率执行模糊图像增强
@@ -682,6 +682,7 @@ class LoadImagesAndLabels(Dataset):
         if not f.exists():
             np.save(f.as_posix(), cv2.imread(self.im_files[i]))
 
+    # 4-mosaic
     def load_mosaic(self, index):
         # YOLOv5 4-mosaic loader. Loads 1 image + 3 random images into a 4-image mosaic
         labels4, segments4 = [], []
@@ -740,6 +741,7 @@ class LoadImagesAndLabels(Dataset):
 
         return img4, labels4
 
+    # 9-mosaic
     def load_mosaic9(self, index):
         # YOLOv5 9-mosaic loader. Loads 1 image + 8 random images into a 9-image mosaic
         labels9, segments9 = [], []
